@@ -16,7 +16,6 @@ link_directories(dependencies)
 add_library(stash STATIC src/Stash.cpp include/Stash.h src/Read.cpp include/Read.h src/city.cc include/city.h include/config.h ${BTLLIB_FILES})
 
 target_include_directories(stash
-        PUBLIC dependencies
         PUBLIC include
         )
 
