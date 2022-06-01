@@ -1,6 +1,9 @@
 #include <cstring>
 #include "Read.h"
 #include "city.h"
+#include <stdlib.h>
+#include <stdio.h>
+
 Read::Read(char *sequence, int length) {
     this->sequence = new char[length + 1];
     strncpy(this->sequence, sequence, length);

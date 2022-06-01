@@ -2,8 +2,6 @@
 #include "Stash.h"
 #include <string>
 #include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 
 Stash::Stash(uint64_t rows, std::vector<std::string> &spacedSeeds, int T1, int T2, int readIDHashTiles) {
     this->rows = rows;
