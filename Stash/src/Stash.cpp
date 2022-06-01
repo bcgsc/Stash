@@ -2,6 +2,8 @@
 #include "Stash.h"
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 
 Stash::Stash(uint64_t rows, std::vector<std::string> &spacedSeeds, int T1, int T2, int readIDHashTiles) {
     this->rows = rows;
@@ -83,6 +85,8 @@ void Stash::fill(std::vector <Read*> & reads, int threads){
                 numOfUsedReads += 1;
             }
         }
+
+//        std::cout << omp_get_thread_num();
 
         btllib::SeedNtHash nt = btllib::SeedNtHash(read->sequence, read->length, seeds, 1, spacedSeedLength);
 

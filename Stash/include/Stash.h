@@ -1,6 +1,7 @@
 #ifndef STOCHASTIC_TILE_HASHING_STASH_H
 #define STOCHASTIC_TILE_HASHING_STASH_H
-#include "/usr/local/Cellar/libomp/14.0.0/include/omp.h"
+
+#include <omp.h>
 #include <vector>
 #include <string>
 #include "Read.h"
