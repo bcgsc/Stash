@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 set(CMAKE_CXX_STANDARD 14)
 
-link_directories(lib ../Stash/dependencies)
+link_directories(../lib ../Stash/dependencies)
 add_executable(target main.cpp)
 
 add_dependencies(target stash)
