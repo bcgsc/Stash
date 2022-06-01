@@ -31,4 +31,4 @@ target_link_libraries(stash
         OpenMP::OpenMP_CXX
         )
 
-install(TARGETS stash DESTINATION ./)
+install(TARGETS stash DESTINATION ../lib)
