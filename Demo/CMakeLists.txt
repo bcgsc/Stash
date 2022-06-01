@@ -10,8 +10,6 @@ set(CMAKE_CXX_STANDARD 14)
 link_directories(../lib ../Stash/dependencies)
 add_executable(target main.cpp)
 
-add_dependencies(target stash)
-
 target_include_directories(target
         PUBLIC ../Stash/include
         )
@@ -20,3 +18,5 @@ target_link_libraries(target
         PUBLIC
         stash
         )
+
+add_dependencies(target stash)
