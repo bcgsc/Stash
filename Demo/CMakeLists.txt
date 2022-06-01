@@ -18,3 +18,5 @@ target_link_libraries(target
         PUBLIC
         stash
         )
+
+add_dependencies(target stash)
