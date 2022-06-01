@@ -1,2 +1,8 @@
-# Stochasting_Tile_Hashing
+### Description
 This repository contains the implementation for the Stash data structure
+
+
+
+### Installation Instruction
+
+
