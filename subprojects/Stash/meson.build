@@ -1,7 +1,7 @@
 project('Stash', 'cpp',
 	version : '1.0.0',
 	license : 'GPL3',
-	default_options : ['cpp_std=c++11', 'warning_level=3', 'werror=true', 'optimization=3'])
+	default_options : ['cpp_std=c++11', 'warning_level=3', 'optimization=3'])
 
 sources = files('src/Stash.cpp', 'src/Read.cpp', 'src/city.cc')
 
