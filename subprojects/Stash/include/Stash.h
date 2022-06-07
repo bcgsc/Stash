@@ -6,7 +6,7 @@
 #include <string>
 #include "Read.h"
 #include "btllib/nthash.hpp"
-#define LOCKS 100000
+#define LOCKS 1000
 
 #define FRAME_SIZE(stash) (stash)->stashRowTiles * (stash)->hashFuncNum
 #define createFrame(frame, stash) int* frame = new int[FRAME_SIZE(stash)];
