@@ -1,4 +1,5 @@
-## Description
+# Stash
+
 This repository contains the implementation for the Stash data structure
 
 ## Dependencies
@@ -23,3 +24,15 @@ meson install
 ```
 
 The Stash library is installed at `Stochastic_Tile_Hashing/subprojects/Stash/lib`, and the demo `Stash_Demo` is avaliable at `Stochastic_Tile_Hashing/build`.
+
+## Usage
+
+Stash provides its functionalities through a simple interface.
+
+### Stash Reads
+
+Each Stash read has a unique ID assigned to it. A read can be created using the `Read(char* sequence, int length)` constructor in `Read.h`, and it can be assigned an ID by manually calling the `void hashReadID(int ID, int B1, int B2)` function, where `B1` and `B2` are the parameters of the Stash. If not manually called, the function is automatically called if the read is used in filling the Stash.
+
+## Publications
+
+## Authors
