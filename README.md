@@ -53,6 +53,27 @@ Direct access to Stash tiles is available through the following functions.
 * `void writeTile(uint64_t row, int column, int value);`
 * `int readTile(uint64_t row, int column);`
 
+### Frames
+
+A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'.
+
+An empty frame can be created using the macro `createFrame(frame, stash)` and it should be later deleted using `deleteFrame(frame)`.
+To fill the frame, the frame should be passed to `void retrieveFrame(const char* sequence, Frame frame)`, where the spaced seed frame `[sequence, sequence + spaced seed length)` will be hashed, and the corresponding Stash rows are copied into the passed frame.
+
+Functions `void printFrame(Frame frame)` and `void printFrame(char* sequence)` can be used to display the contents of a frame.
+
+To determine whether two frames come from similar regions, the following functions can be used.
+* int countFrameMatches(Frame frame1, Frame frame2); // From previously retreived frames.
+* int countFrameMatches(const char* sequence1, const char* sequence2); // Directly from two spaced seed frames.
+
+For related frames, the return value is relatively larger than the return value for unrelated frames.
+
+### Windows
+
+Stash provides `int countWindowMatches(Window window1, Window window2)` to let the user compare two regions as well. A window can be created through the `Window(char* start, int framesNum, int stride)` consturctor, and it simply represents a set of frames, where each frame has a distance of `stride` from the previous one.
+
+For related windows, the return value is relatively larger than the return value for unrelated windows.
+
 ## Publications
 
 ## Authors
