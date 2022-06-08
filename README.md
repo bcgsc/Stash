@@ -1,8 +1,15 @@
-# Stash
+# *Stash*
 
 This repository contains the implementation for the **Stash** data structure
 
-## Dependencies
+# Presentations
+Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
+
+# Authors
+Armaghan Sarvar, Lauren Coombe, Renè Warren, Inanc Birol
+
+
+# Dependencies
   * Compiler with OpenMP Support
   * [meson](https://mesonbuild.com/)
   * [ninja](https://ninja-build.org/)
@@ -14,7 +21,7 @@ conda install -c conda-forge meson ninja
 conda install -c bioconda btllib
 ```
 
-## Installation
+# Installation
 
 To build the Stash library and a simple demo of its application, run the following commands from within the `Stochastic_Tile_Hashing` directory:
 ```
@@ -25,7 +32,7 @@ meson install
 
 The Stash library is installed at `Stochastic_Tile_Hashing/subprojects/Stash/lib`, and the demo `Stash_Demo` is avaliable at `Stochastic_Tile_Hashing/build`.
 
-## Usage
+# Usage
 
 Stash provides its functionalities through a simple interface.
 
@@ -74,8 +81,3 @@ Stash provides `int countWindowMatches(Window window1, Window window2)` to let t
 
 For related windows, the return value is relatively larger than the return value for unrelated windows.
 
-## Presentations
-Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
-
-## Authors
-Armaghan Sarvar, Lauren Coombe, Renè Warren, Inanc Birol
