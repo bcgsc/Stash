@@ -49,7 +49,7 @@ Stash* fillStash(){
             new Read("ACCTTA"),
     };
 
-    Stash* stash = new Stash(16, spacedSeeds, 4, 4, 8);
+    Stash* stash = new Stash(16, spacedSeeds, 4, 4);
     stash->fill(reads);
     stash->print();
 
@@ -102,7 +102,7 @@ void compareFrames(){
             new Read("AACCGGGTGCTGCTGATGCTGAAATAGGGGGCGCAAAT"),
     };
 
-    Stash* stash = new Stash(1024, spacedSeeds, 4, 4, 8);
+    Stash* stash = new Stash(1024, spacedSeeds, 4, 4);
     stash->fill(reads);
 
     // Related frames with 7x coverage.
@@ -138,7 +138,7 @@ void compareRegions(){
             new Read(     "GGTGCTGCTGATGCTGAAATAGGGGGCGCAAAT"),
             new Read("AACCGGGTGCTGCTGATGCTGAAATAGGGGGCGCAAAT"),
     };
-    Stash* stash = new Stash(1024, spacedSeeds, 4, 4, 8);
+    Stash* stash = new Stash(1024, spacedSeeds, 4, 4);
     stash->fill(reads, 8);
 
     Stash::Window window1(reads[0]->sequence, 3, 1);
