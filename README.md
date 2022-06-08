@@ -6,7 +6,7 @@ This repository contains the implementation for the **Stash** data structure
 Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
 
 # Authors
-Armaghan Sarvar, Lauren Coombe, Renè Warren, Inanc Birol
+Armaghan Sarvar, Lauren Coombe, René Warren, Inanc Birol
 
 
 # Dependencies
