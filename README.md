@@ -1,6 +1,6 @@
 # Stash
 
-This repository contains the implementation for the Stash data structure
+This repository contains the implementation for the **Stash** data structure
 
 ## Dependencies
   * Compiler with OpenMP Support
@@ -29,23 +29,23 @@ The Stash library is installed at `Stochastic_Tile_Hashing/subprojects/Stash/lib
 
 Stash provides its functionalities through a simple interface.
 
-### Stash Reads
+### Stash input
 
-Each Stash read has a unique ID assigned to it. A read can be created using the `Read(char* sequence, int length)` constructor in `Read.h`, and it can be assigned an ID by manually calling the `void hashReadID(int ID, int B1, int B2)` function, where `B1` and `B2` are the parameters of the Stash. If not manually called, the function is automatically called if the read is used in filling the Stash.
+Each Stash input sequence has a unique ID assigned to it. A sequence/read can be created using the `Read(char* sequence, int length)` constructor in `Read.h`, and it can be assigned an ID by manually calling the `void hashReadID(int ID, int B1, int B2)` function, where `B1` and `B2` are the parameters of the Stash. If not manually called, this function is automatically called if the read is used in filling the Stash.
 
 ### Stash
 
-A Stash can be created using the `Stash(uint64_t rows, std::vector<std::string> & spacedSeeds, int T1, int T2)` constructor.
-* `rows`: Determines the number of rows of the Stash.
+A new Stash data structure can be created using the `Stash(uint64_t rows, std::vector<std::string> & spacedSeeds, int T1, int T2)` constructor.
+* `rows`: Determines the number of rows in Stash.
 * `spacedSeeds`: A vector of strings, where each string represents a spaced seed frame.
-* `T1`: The number of bits used to represent a column in Stash.
+* `T1`: The number of bits used to represent a column index in Stash.
 * `T2`: The number of bits used to represent a tile value in Stash.
 
-Calling `void save(const char* path)` on a Stash stores its data and all parameters into a binary file. The Stash can be later restored using the `Stash(const char* path)` constructor.
+Calling `void save(const char* path)` on a created Stash stores its data and all parameters into a binary file. The saved Stash can be later restored using the `Stash(const char* path)` constructor.
 
-### Filling the Stash
+### Filling Stash
 
-The `void fill(std::vector <Read*> & reads, int threads=-1)` function can be used to fill a vector of reads into the Stash, where `threads` is the number of OpenMP threads used to perform the function (by default, `omp_get_max_threads()` is used). Each read will be assigned a unique ID if it is unassigned. `void print()` can be used to display the content of the Stash for debug purposes.
+The `void fill(std::vector <Read*> & reads, int threads=-1)` function can be used to fill a vector of reads into Stash, where `threads` is the number of OpenMP threads used to perform the function (by default, `omp_get_max_threads()` is used). Each read will be assigned a unique ID if it is unassigned. `void print()` can be used to display the content of Stash for debug purposes.
 
 ### Tiles
 
@@ -74,6 +74,8 @@ Stash provides `int countWindowMatches(Window window1, Window window2)` to let t
 
 For related windows, the return value is relatively larger than the return value for unrelated windows.
 
-## Publications
+## Presentations
+Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
 
 ## Authors
+Armaghan Sarvar, Lauren Coombe, Renè Warren, Inanc Birol
