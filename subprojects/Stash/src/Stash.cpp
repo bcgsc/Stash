@@ -3,10 +3,9 @@
 #include <string>
 #include <iostream>
 
-Stash::Stash(uint64_t rows, std::vector<std::string> &spacedSeeds, int T1, int T2, int readIDHashTiles) {
+Stash::Stash(uint64_t rows, std::vector<std::string> &spacedSeeds, int T1, int T2) {
     this->rows = rows;
     this->spacedSeeds = spacedSeeds;
-    this->readIDHashTiles = readIDHashTiles;
     this->T1 = T1;
     this->T2 = T2;
     computeSecondaryParameters();
@@ -32,7 +31,6 @@ Stash::Stash(const char *stashPath) {
         spacedSeeds.emplace_back(spacedSeedi);
     }
     fread(&rows, sizeof(uint64_t), 1, file);
-    fread(&readIDHashTiles, sizeof(int), 1, file);
     fread(&T1, sizeof(int), 1, file);
     fread(&T2, sizeof(int), 1, file);
     computeSecondaryParameters();
@@ -45,6 +43,8 @@ void Stash::computeSecondaryParameters(){
     for(int i = 0; i < LOCKS; i++)
         omp_init_lock(&(locks[i]));
 
+    hashFuncNum = (int) spacedSeeds.size();
+    readIDHashTiles = (int) pow(2, hashFuncNum - 1);
     B1 = T1 * readIDHashTiles;
     B2 = T2 * readIDHashTiles;
     stashRowTiles = (int) pow(2, T1);
@@ -53,7 +53,6 @@ void Stash::computeSecondaryParameters(){
     segmentsPerInteger = intSize / T2;
     segmentMax = (int) pow(2, T2);
     spacedSeedLength = (int) spacedSeeds[0].length();
-    hashFuncNum = (int) spacedSeeds.size();
     seeds = btllib::parse_seeds(spacedSeeds);
 }
 
@@ -123,7 +122,6 @@ void Stash::save(const char* filePath){
         fwrite(spacedSeeds[i].c_str(), sizeof(char), spacedSeedLength, file);
     }
     fwrite(&rows, sizeof(uint64_t), 1, file);
-    fwrite(&readIDHashTiles, sizeof(int), 1, file);
     fwrite(&T1, sizeof(int), 1, file);
     fwrite(&T2, sizeof(int), 1, file);
     fwrite(data, sizeof(int), rows * intsPerRow, file);
