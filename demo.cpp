@@ -42,7 +42,10 @@ int main() {
 Stash* fillStash(){
     std::vector<std::string> spacedSeeds = {
             "110011",
-            "010010"
+            "010010",
+            "011110",
+            "101101"
+
     };
     std::vector<Read*> reads = {
             new Read("AACCGG"),
