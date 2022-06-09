@@ -40,7 +40,7 @@ public:
     void printFrame(char* sequence);
     void writeTile(uint64_t row, int column, int value);
     int readTile(uint64_t row, int column);
-    Stash(uint64_t rows, std::vector<std::string> & spacedSeeds, int T1, int T2, int readIDHashTiles);
+    Stash(uint64_t rows, std::vector<std::string> & spacedSeeds, int T1, int T2);
     Stash(const char* stashPath);
     ~Stash();
     int numOfUsedReads = 0;
