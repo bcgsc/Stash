@@ -79,7 +79,7 @@ For related frames, the return value is relatively larger than the return value 
 
 A schematic of how windows of frames are designed is provided below.
 
-<img src="figures/windows.jpeg" width="800" height="400">
+<img src="figures/windows.jpeg" width="800" height="350">
 
 Stash provides `int countWindowMatches(Window window1, Window window2)` to let the user compare two regions as well. A window can be created through the `Window(char* start, int framesNum, int stride)` consturctor, and it simply represents a set of frames, where each frame has a distance of `stride` from the previous one.
 
