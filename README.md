@@ -70,8 +70,8 @@ To fill the frame, the frame should be passed to `void retrieveFrame(const char*
 Functions `void printFrame(Frame frame)` and `void printFrame(char* sequence)` can be used to display the contents of a frame.
 
 To determine whether two frames come from similar regions, the following functions can be used.
-* int countFrameMatches(Frame frame1, Frame frame2); // From previously retreived frames.
-* int countFrameMatches(const char* sequence1, const char* sequence2); // Directly from two spaced seed frames.
+* `int countFrameMatches(Frame frame1, Frame frame2); // From previously retreived frames.`
+* `int countFrameMatches(const char* sequence1, const char* sequence2); // Directly from two spaced seed frames.`
 
 For related frames, the return value is relatively larger than the return value for unrelated frames.
 
