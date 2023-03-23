@@ -3,7 +3,9 @@
 This repository contains the implementation for the **Stash** data structure
 
 # Presentations
-Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
+Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Genome misassembly detection using Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
+
+Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2023, April 14–19). Stash: A data structure based on stochastic tile hashing [Conference presentation]. RECOMB-Seq Satellite Conference on Biological Sequence Analysis 2023, Istanbul, Turkey.
 
 # Authors
 Armaghan Sarvar, Lauren Coombe, René Warren, Inanc Birol
