@@ -1,6 +1,6 @@
-# *Stash*
-
-This repository contains the implementation for the **Stash** data structure
+# Stash
+###### Version 1.2.0
+This repository contains the implementation for the **Stash** data structure and its use in genome misassembly detection.
 
 # Presentations
 * Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2023, April 14–19). Stash: A data structure based on stochastic tile hashing [Conference presentation]. RECOMB-Seq Satellite Conference on Biological Sequence Analysis 2023, Istanbul, Turkey.
@@ -13,78 +13,66 @@ Armaghan Sarvar, Lauren Coombe, René Warren, Inanc Birol
 
 # Dependencies
   * Compiler with OpenMP Support
-  * [meson](https://mesonbuild.com/)
-  * [ninja](https://ninja-build.org/)
+  * [cmake](https://cmake.org/download/)
   * [btllib](https://github.com/bcgsc/btllib) v1.4.3+
 
 The dependencies can be installed through [Conda](https://docs.conda.io/en/latest/) package manager:
 ```
-conda install -c conda-forge meson ninja 
+conda install -c anaconda cmake
 conda install -c bioconda btllib
 ```
 
 # Installation
 
-To build the Stash library and a simple demo of its application, run the following commands from within the `Stochastic_Tile_Hashing` directory:
+To build Stash, run the following commands from within the `Stochastic_Tile_Hashing` directory:
 ```
-meson setup build --buildtype release
-cd build
-meson install
+cmake -S . -B Build
+cd Build
+make
 ```
 
-The Stash library is installed at `Stochastic_Tile_Hashing/subprojects/Stash/lib`, and the demo `Stash_Demo` is avaliable at `Stochastic_Tile_Hashing/build`.
+Inside `Stochastic_Tile_Hashing/Build/Stash`, you can find an executable `Stash` and a static library `libStash.a`, which can be paired with the include directory at `Stochastic_Tile_Hashing/Stash/Include`.
 
 # Usage
+The Stash executable runs in two operation modes.
 
-Stash provides its functionalities through a simple interface.
+`fill`: Populates a Stash data structure given a set of reads. Size of the Stash will be `2 ^ (logRows + 3)` Bytes (e.g., for `logRows` equal to 3, Stash requires 8 GB of memory).
+- **-r,-‌-reads:** Input Reads in Fasta Format
+- **-o,-‌-output:** Output Path
+- **-l,-‌-logRows:** Log2 of Number of Stash Rows
+- **-t,-‌-threads:** Number of Threads
 
-### Stash input
+Example: `./Stash fill -r reads.fa -o stash.bin -l 30 -t 8`
 
-Each Stash input sequence has a unique ID assigned to it. A sequence/read can be created using the `Read(char* sequence, int length)` constructor in `Read.h`, and it can be assigned an ID by manually calling the `void hashReadID(int ID, int B1, int B2)` function, where `B1` and `B2` are the parameters of the Stash. If not manually called, this function is automatically called if the read is used in filling the Stash.
+- **-a,-‌-assembly:** Input Assembly in Fasta Format
+- **-s,-‌-stash:** Input Stash Path
+- **-o,-‌-output:** Output Path
+- **-t,-‌-threads:** Number of Threads
+- **-n,-‌-number_of_frames:** Number of Frames
+- **-r,-‌-stride:** Stride
+- **-l,-‌-delta:** Delta
+- **-x,-‌-threshold:** Cut threshold
+- **-m,--max_pooling_radius:** Max-Pooling Radius
+- **-d,--min_cut_distance:** Minimum Cut Distance
+
+`cut`: Attempts to reduce the number of misassemblies in a given assembly by cutting misassembled contigs.
+
+Example: `./Stash cut -a assembly.fa -o output.fa -s stash.bin -t 8`
 
 ### Stash
 
-A new Stash data structure can be created using the `Stash(uint64_t rows, std::vector<std::string> & spacedSeeds, int T1, int T2)` constructor.
-* `rows`: Determines the number of rows in Stash.
+A new Stash data structure can be created using the `Stash( uint32_t logRows, const std::vector< std::string >& spacedSeeds )` constructor.
+* `logRows`: Determines the number of rows in Stash as 2 ^ logRows.
 * `spacedSeeds`: A vector of strings, where each string represents a spaced seed frame.
-* `T1`: The number of bits used to represent a column index in Stash.
-* `T2`: The number of bits used to represent a tile value in Stash.
 
-Calling `void save(const char* path)` on a created Stash stores its data and all parameters into a binary file. The saved Stash can be later restored using the `Stash(const char* path)` constructor.
-
-### Filling Stash
-
-The `void fill(std::vector <Read*> & reads, int threads=-1)` function can be used to fill a vector of reads into Stash, where `threads` is the number of OpenMP threads used to perform the function (by default, `omp_get_max_threads()` is used). Each read will be assigned a unique ID if it is unassigned. `void print()` can be used to display the content of Stash for debug purposes.
-
-### Tiles
-
-Direct access to Stash tiles is available through the following functions.
-* `void writeTile(uint64_t row, int column, int value);`
-* `int readTile(uint64_t row, int column);`
+Calling `void save( const char* path )` on a created Stash stores its data and all parameters into a binary file. The saved Stash can be later restored using the `Stash( const char* path )` constructor.
 
 ### Frames
 
-A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'.
-
-An empty frame can be created using the macro `createFrame(frame, stash)` and it should be later deleted using `deleteFrame(frame)`.
-To fill the frame, the frame should be passed to `void retrieveFrame(const char* sequence, Frame frame)`, where the spaced seed frame `[sequence, sequence + spaced seed length)` will be hashed, and the corresponding Stash rows are copied into the passed frame.
-
-Functions `void printFrame(Frame frame)` and `void printFrame(char* sequence)` can be used to display the contents of a frame.
-
-To determine whether two frames come from similar regions, the following functions can be used.
-* `int countFrameMatches(Frame frame1, Frame frame2); // From previously retreived frames.`
-* `int countFrameMatches(const char* sequence1, const char* sequence2); // Directly from two spaced seed frames.`
-
-For related frames, the return value is relatively larger than the return value for unrelated frames.
+A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'. A metric called _Number of Frames_ can be defined between two Stash frames. For related frames, this value is relatively larger than the value for unrelated frames.
 
 ### Windows of Frames
 
 A schematic of how windows of frames are designed is provided below.
 
 <img src="figures/windows.jpeg" width="800" height="270">
-
-Stash provides `int countWindowMatches(Window window1, Window window2)` to let the user compare two regions as well. A window can be created through the `Window(char* start, int framesNum, int stride)` consturctor, and it simply represents a set of frames, where each frame has a distance of `stride` from the previous one.
-
-For related windows, the return value is relatively larger than the return value for unrelated windows.
-
-
