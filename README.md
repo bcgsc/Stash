@@ -1,6 +1,6 @@
 # Stash
 ###### Version 1.2.0
-This repository contains the implementation for the **Stash** data structure and its utility in long-read genome misassembly detection and correction.
+This repository contains the implementation for the **Stash** data structure and its utility in _de novo_ long read genome misassembly detection and correction.
 
 # Presentations
 * Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2023, April 14–19). Stash: A data structure based on stochastic tile hashing [Conference presentation]. RECOMB-Seq Satellite Conference on Biological Sequence Analysis 2023, Istanbul, Turkey.
