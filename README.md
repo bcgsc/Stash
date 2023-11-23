@@ -69,7 +69,7 @@ Calling `void save( const char* path )` on a created Stash stores its data and a
 
 In the following figure, you can see a visualization of the Stash data structure: Algorithm, data structure, and sequence data population process with four spaced seed patterns (h1-h4). In order to combine the spaced seed output values with the two sequence ID hashes, for the ith spaced seed pattern, the ith most significant bits of the other spaced seed pattern outputs are concatenated in order to address an index in the sequence ID hash tiles, which would specify the column and the stored tile value in Stash.
 
-<img src="figures/stash.jpeg" width="500" height="300">
+<img src="figures/stash.pdf" width="500" height="300">
 
 
 ### Frames
