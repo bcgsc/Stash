@@ -8,7 +8,7 @@ This repository contains the implementation for the **Stash** data structure and
 * Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2022, July 10–14). Genome misassembly detection using Stash: A data structure based on stochastic tile hashing [Conference presentation]. Intelligent Systems for Molecular Biology 2022, Madison, WI, United States.
 
 # Credits
-* Research concept and design: Armaghan Sarvar and Inanc Birol<br/>
+* Research concept and design: Inanc Birol and Armaghan Sarvar<br/>
 * Implementation, software programming, and experimentation: Armaghan Sarvar<br/>
 * Additional inputs and feedback: Lauren Coombe, René Warren
 
