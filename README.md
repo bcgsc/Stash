@@ -69,7 +69,7 @@ Calling `void save( const char* path )` on a created Stash stores its data and a
 
 In the following figure, you can see a visualization of the Stash data structure: algorithm and sequence data population process with 4 spaced seed patterns (h1-h4). In order to combine the spaced seed output values with the two sequence ID hashes, for the _i_th spaced seed pattern, the _i_th most significant bits of the other spaced seed pattern outputs are concatenated in order to address an index in the sequence ID hash tiles, which would specify the column and the stored tile value in Stash.
 
-<img src="figures/stash.svg" width="550" height="360">
+<img src="figures/stash.svg" width="560" height="360">
 
 
 ### Frames
@@ -80,4 +80,4 @@ A frame is defined as the set of Stash rows accessed for a given spaced seed fra
 
 A schematic of how windows of frames are designed is provided below. Each window consists of a set of frames that have a distance of stride from each other. We compare two windows by counting the maximum number of matches between all pairs of their frames, in order to have a more general view of a genomic region and also ignore sequence errors and gaps.
 
-<img src="figures/windows.jpeg" width="700" height="170">
+<img src="figures/windows.jpeg" width="650" height="170">
