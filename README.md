@@ -82,4 +82,4 @@ A frame is defined as the set of Stash rows accessed for a given spaced seed fra
 
 A schematic of how windows of frames are designed is provided below. Each window consists of a set of frames that have a distance of stride from each other. We compare two windows by counting the maximum number of matches between all pairs of their frames, in order to have a more general view of a genomic region and also ignore sequence errors and gaps.
 
-<img src="figures/windows.jpeg" width="640" height="175">
+<img src="figures/windows.jpeg" width="630" height="175">
