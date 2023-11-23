@@ -67,6 +67,11 @@ A new Stash data structure can be created using the `Stash( uint32_t logRows, co
 
 Calling `void save( const char* path )` on a created Stash stores its data and all parameters into a binary file. The saved Stash can be later restored using the `Stash( const char* path )` constructor.
 
+In the following figure, you can see a visualization of the Stash data structure: Algorithm, data structure, and sequence data population process with four spaced seed patterns (h1-h4). In order to combine the spaced seed output values with the two sequence ID hashes, for the ith spaced seed pattern, the ith most significant bits of the other spaced seed pattern outputs are concatenated in order to address an index in the sequence ID hash tiles, which would specify the column and the stored tile value in Stash.
+
+<img src="figures/stash.jpeg" width="800" height="300">
+
+
 ### Frames
 
 A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'. A metric called _Number of Matches_ can be defined between two Stash frames. For related frames, this value is relatively larger than the value for unrelated frames. In the problem of genome misassembly detection, the _Number of Matches_ metric represents the number of overlapping sequencing reads that cover a genomic region (coverage by read set). 
