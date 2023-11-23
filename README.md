@@ -9,9 +9,9 @@ This repository contains the implementation for the **Stash** data structure and
 
 # Credits
 Research concept and design: Armaghan Sarvar and Inanc Birol
-\\
+<br/>
 Implementation and software programming: Armaghan Sarvar
-\\
+<br/>
 Inputs and discussions: Lauren Coombe, René Warren, Inanc Birol
 
 
