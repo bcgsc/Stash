@@ -1,6 +1,6 @@
 # Stash
 ###### Version 1.2.0
-This repository contains the implementation for the **Stash** data structure and its utility in genome misassembly detection.
+This repository contains the implementation for the **Stash** data structure and its utility in long-read genome misassembly detection and correction.
 
 # Presentations
 * Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2023, April 14–19). Stash: A data structure based on stochastic tile hashing [Conference presentation]. RECOMB-Seq Satellite Conference on Biological Sequence Analysis 2023, Istanbul, Turkey.
@@ -36,7 +36,7 @@ Inside `Stochastic_Tile_Hashing/Build/Stash`, you can find an executable `Stash`
 # Usage
 The Stash executable runs in two operation modes.
 
-`fill`: Populates a Stash data structure given a set of reads. Size of the Stash will be `2 ^ (logRows + 3)` Bytes (e.g., for `logRows` equal to 3, Stash requires 8 GB of memory).
+`fill`: Populates a Stash data structure given a set of reads. The size of the Stash will be `2 ^ (logRows + 3)` Bytes (e.g., for `logRows` equal to 3, Stash requires 8 GB of memory).
 - **-r,-‌-reads:** Input Reads in Fasta Format
 - **-o,-‌-output:** Output Path
 - **-l,-‌-logRows:** Log2 of Number of Stash Rows
@@ -73,6 +73,6 @@ A frame is defined as the set of Stash rows accessed for a given spaced seed fra
 
 ### Windows of Frames
 
-A schematic of how windows of frames are designed is provided below.
+A schematic of how windows of frames are designed is provided below. Each window consists of a set of frames that have a distance of stride with each other.
 
 <img src="figures/windows.jpeg" width="800" height="270">
