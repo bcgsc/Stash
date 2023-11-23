@@ -67,7 +67,7 @@ A new Stash data structure can be created using the `Stash( uint32_t logRows, co
 
 Calling `void save( const char* path )` on a created Stash stores its data and all parameters into a binary file. The saved Stash can be later restored using the `Stash( const char* path )` constructor.
 
-In the following figure, you can see a visualization of the Stash data structure: algorithm and sequence data population process with 4 spaced seed patterns (h1-h4). In order to combine the spaced seed output values with the two sequence ID hashes, for the _i_th spaced seed pattern, the _i_th most significant bits of the other spaced seed pattern outputs are concatenated in order to address an index in the sequence ID hash tiles, which would specify the column and the stored tile value in Stash.
+In the following figure, you can see a visualization of the Stash data structure: algorithm and sequence data population process with 4 spaced seed patterns (h1-h4). In order to combine the spaced seed output values with the two sequence ID hashes, for the i_th spaced seed pattern, the i_th most significant bits of the other spaced seed pattern outputs are concatenated in order to address an index in the sequence ID hash tiles, which would specify the column and the stored tile value in Stash.
 
 <img src="figures/stash.svg" width="560" height="360">
 
