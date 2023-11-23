@@ -69,10 +69,10 @@ Calling `void save( const char* path )` on a created Stash stores its data and a
 
 ### Frames
 
-A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'. A metric called _Number of Frames_ can be defined between two Stash frames. For related frames, this value is relatively larger than the value for unrelated frames.
+A frame is defined as the set of Stash rows accessed for a given spaced seed frame. Specifically, it is a two-dimensional array of tiles with width='number of spaced seeds' and height='number of Stash columns'. A metric called _Number of Matches_ can be defined between two Stash frames. For related frames, this value is relatively larger than the value for unrelated frames. In the problem of genome misassembly detection, the _Number of Matches_ metric represents the number of overlapping sequencing reads that cover a genomic region (coverage by read set). 
 
 ### Windows of Frames
 
-A schematic of how windows of frames are designed is provided below. Each window consists of a set of frames that have a distance of stride with each other.
+A schematic of how windows of frames are designed is provided below. Each window consists of a set of frames that have a distance of stride from each other. We compare two windows by counting the maximum number of matches between all pairs of their frames, in order to have a more general view of a genomic region and also ignore sequence errors and gaps.
 
 <img src="figures/windows.jpeg" width="800" height="270">
