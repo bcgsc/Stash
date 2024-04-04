@@ -33,7 +33,6 @@ namespace Stash
 	bool ScopedFastaReader::open( const char* path )
 	{
 		m_reader = std::make_unique<btllib::SeqReader>( path, btllib::SeqReader::Flag::LONG_MODE );
-		m_reader->begin();
 		return true;
 	}
 

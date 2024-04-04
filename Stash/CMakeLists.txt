@@ -20,9 +20,15 @@ target_include_directories(Stash
 		Source
 	PUBLIC
 		Include
+		${conda_env_path}/include
 )
 
 find_package(OpenMP REQUIRED)
+
+target_link_directories(Stash
+	PUBLIC
+		${conda_env_path}/lib
+)
 
 target_link_libraries(Stash
 	PRIVATE

@@ -45,7 +45,7 @@ namespace Stash
 		uint64_t m_lastRow;
 
 		uint32_t m_spacedSeedLength;
-		std::vector<btllib::SpacedSeed> m_ntSeeds;
+		std::vector<btllib::hashing_internals::SpacedSeed> m_ntSeeds;
 		std::vector<std::string> m_rawSeeds;
 	};
 

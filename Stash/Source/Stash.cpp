@@ -458,7 +458,7 @@ namespace Stash
                     }
 
                     if ( max < cutParameters.cutThreshold ){
-                        if ( position - lastCutPosition >= cutParameters.minCutDistance ) {
+                        if ( position - lastCutPosition >= cutParameters.minCutDistance || lastCutPosition == 0 ) {
                             if ( chainStart != 0 )
                             {
                                 uint64_t end = ( chainStart + lastCutPosition ) / 2 + shift;
