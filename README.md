@@ -50,12 +50,6 @@ Example: `./Stash fill -r reads.fa -o stash.bin -l 30 -t 8`
 
 Example: `./Stash cut -a assembly.fa -o output.fa -s stash.bin -t 8`
 
-# Misassembly Detection Demo
-The `TestData` directory in the repository contains a toy read set and a toy assembly to showcase Stash's ability to correct misassemblies. The `test_reads.fa` includes 14 duplicate reads that can be inserted into Stash with the following command.
-- `./Stash fill -r test_reads.fa -o stash.bin`
-
-The assembly `test_assembly.fa` contains similar subsequences as the read set, with a previously unseen sequence in the middle. The following command is able to cut the assembly into parts to correct the misassembled patterns.
-- `./Stash cut -a test_assembly.fa -o corrected_assembly.fa -s stash.bin`
 
 # Introduction to Stash
 
@@ -82,6 +76,14 @@ A schematic of how windows of frames are designed is provided below. Each window
 
 <img src="figures/windows.jpeg" width="630" height="175">
 
+
+# Misassembly Detection Demo
+The `TestData` directory in the repository contains a toy read set and a toy assembly to showcase Stash's ability to correct misassemblies. The `test_reads.fa` includes 14 duplicate reads that can be inserted into Stash with the following command.
+- `./Stash fill -r test_reads.fa -o stash.bin`
+
+The assembly `test_assembly.fa` contains similar subsequences as the read set, with a previously unseen sequence in the middle. The following command is able to cut the assembly into parts to correct the misassembled patterns.
+- `./Stash cut -a test_assembly.fa -o corrected_assembly.fa -s stash.bin`
+
 # Presentations
 * Sarvar, A., Coombe, L., Warren, R., & Birol, I. (2023, April 14–19). Stash: A data structure based on stochastic tile hashing [Conference presentation]. RECOMB-Seq Satellite Conference on Biological Sequence Analysis 2023, Istanbul, Turkey.
 
@@ -90,4 +92,4 @@ A schematic of how windows of frames are designed is provided below. Each window
 # Credits
 * Research concept and design: Inanc Birol and Armaghan Sarvar<br/>
 * Implementation and experimentation: Armaghan Sarvar<br/>
-* Additional feedback: Lauren Coombe, René Warren
+* Feedback: Lauren Coombe, René Warren
