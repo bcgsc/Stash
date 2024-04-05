@@ -57,6 +57,8 @@ The `TestData` directory in the repository contains a toy read set and a toy ass
 The assembly `test_assembly.fa` contains similar subsequences as the read set, with a previously unseen sequence in the middle. The following command is able to cut the assembly into parts to correct the misassembled patterns.
 - `./Stash cut -a test_assembly.fa -o corrected_assembly.fa -s stash.bin`
 
+# Introduction to Stash
+
 ### Stash
 
 A new Stash data structure can be created using the `Stash( uint32_t logRows, const std::vector< std::string >& spacedSeeds )` constructor.
