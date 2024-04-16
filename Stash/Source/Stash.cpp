@@ -26,6 +26,7 @@ namespace Stash
     {
         initialize();
 
+	// Initialize the Stash memory.
         m_memory = new uint64_t[ m_rows ];
         memset( m_memory, 0x0, m_rows * sizeof( uint64_t ) );
     }
@@ -40,6 +41,7 @@ namespace Stash
 
         m_lastRow = m_rows - 1;
 
+	// Set up the spaced seeds for ntHash.
         m_spacedSeedLength = static_cast< uint32_t >( m_rawSeeds[ 0 ].size() );
         m_ntSeeds = btllib::parse_seeds( m_rawSeeds );
     }
@@ -144,9 +146,11 @@ namespace Stash
 
         omp_set_num_threads( ( int32_t ) threads );
 
+	// Each thread has its own local data.
         std::vector< ThreadData_Fill > threadData;
         threadData.resize( threads );
 
+	// Split reads between threads.
 	int64_t readsCount = ( int64_t ) reads.size();
 #pragma omp parallel for schedule( dynamic )
         for ( int64_t i = 0; i < readsCount; ++i )
@@ -159,6 +163,7 @@ namespace Stash
                 STASH_LOG_INFO_PARAMS( "Processing read %" PRId64 ".", i );
             }
 
+	    // Ignore tiny reads.
             if ( read->m_length < m_spacedSeedLength )
                 continue;
 
@@ -167,6 +172,7 @@ namespace Stash
             uint64_t hash1 = read->m_hash1;
             uint64_t hash2 = read->m_hash2;
 
+	    // Create read ID hash tiles.
             for ( uint32_t tileIndex = 0; tileIndex < Consts::READ_ID_TILES * 2; )
             {
                 readIdTiles[ tileIndex++ ] = hash1 & Consts::MAX_T1;
@@ -176,6 +182,7 @@ namespace Stash
                 hash2 >>= Consts::T2;
             }
 
+	    // Roll over the sequence and perform insertions.
             btllib::SeedNtHash nt{ read->m_sequence, read->m_length, m_ntSeeds, 1, m_spacedSeedLength };
             while ( nt.roll() )
             {
@@ -185,6 +192,7 @@ namespace Stash
 
                 while ( hashes < last )
                 {
+		    // Update the Stash tile.
                     uint64_t tileIndex = ( ( xors ^ *hashes ) & 7 ) << 1;
 
                     uint64_t row = *hashes++ & m_lastRow;
@@ -319,6 +327,7 @@ namespace Stash
 
         omp_set_num_threads( ( int32_t ) threads );
 
+	// Each thread has its own private data.
         std::vector< ThreadData_Cut > threadData;
         threadData.resize( threads );
 
@@ -332,6 +341,7 @@ namespace Stash
         uint32_t lastValidHashOffset = 2 * windowParameters.stride * ( windowParameters.numberOfFrames - 1 ) + windowParameters.delta;
         uint32_t copySize = lastValidHashOffset * Consts::SPACED_SEED_COUNT * sizeof( uint64_t );
 
+	// Set up intermediate memory for each thread.
         for ( uint32_t i = 0; i < threads; i++ )
         {
             ThreadData_Cut& data = threadData[ i ];
@@ -345,8 +355,10 @@ namespace Stash
 
         while ( true )
         {
+	    // Read sequences in batches.
             uint32_t readCount = reader.loadSequences( batchSize, sequences );
 
+	    // Schedule the batch between threads.
             int sequencesCount = ( int64_t ) sequences.size();
 #pragma omp parallel for schedule( dynamic )
             for ( int64_t i = 0; i < sequencesCount; ++i )
@@ -355,6 +367,7 @@ namespace Stash
 
                 ThreadData_Cut& threadExclusiveData = threadData[ omp_get_thread_num() ];
 
+		// Ignore short sequences.
                 if ( sequence->m_length < minContigLength )
                 {
                     threadExclusiveData.outputAssembly.emplace_back( sequence->m_id, sequence->m_sequence, sequence->m_length );
@@ -372,6 +385,7 @@ namespace Stash
                 uint64_t currentBatchCounter = 0;
                 uint8_t matchSet[ 16 * 16 ];
 
+		// Generate the matches signal.
                 btllib::SeedNtHash nt{ sequence->m_sequence, sequence->m_length, m_ntSeeds, 1, m_spacedSeedLength };
                 while ( 1 ){
                     while ( hashCounter < maxHashes && currentBatchCounter < chunkSize ){
@@ -386,7 +400,8 @@ namespace Stash
                     }
 
                     for ( uint64_t position = hashCounter - currentBatchCounter; position < hashCounter - lastValidHashOffset; position++ ){
-                        int maxMatches = 0;
+                        // Count number of matches between two windows.
+			int maxMatches = 0;
                         uint64_t frameIndex = position - ( hashCounter - currentBatchCounter );
                         uint64_t lastFrame1 = frameIndex + windowParameters.numberOfFrames * windowParameters.stride;
                         uint64_t lastFrame2 = lastFrame1 + distance;
@@ -449,6 +464,7 @@ namespace Stash
                 uint64_t lastCutPosition = 0;
                 uint64_t chainStart = 0;
 
+		// Perform cutting over the matches signal.
                 for ( uint64_t position = cutParameters.maxPoolingRadius + 1; position < matchesLength - cutParameters.maxPoolingRadius - 1; position++ )
                 {
                     uint32_t max = 0;
@@ -474,6 +490,7 @@ namespace Stash
                     }
                 }
 
+		// Write the output.
                 if ( chainStart != 0 ){
                     uint64_t end = ( chainStart + lastCutPosition ) / 2 + shift;
 
