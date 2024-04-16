@@ -12,6 +12,7 @@ namespace Stash
 
 	namespace Consts
 	{
+		// Stash structure parameters.
 		constexpr uint64_t T1 = 4;
 		constexpr uint64_t T2 = 4;
 		constexpr uint32_t READ_ID_TILES = 8;
@@ -25,14 +26,20 @@ namespace Stash
 	class Stash
 	{
 	public:
+		// Creates the Stash with "2 ^ logRows" rows.
 		Stash( uint32_t logRows, const std::vector< std::string >& spacedSeeds );
+		// Loads Stash from a given path.
 		Stash( const char* stashPath );
 		~Stash();
 
+		// Populates the Stash given a set of reads.
 		bool fill( const char* readsPath, const uint32_t threads );
 		void fill( std::vector< std::unique_ptr< Read > >& reads, const uint32_t threads );
+
+		// Performs StashCut to correct misassemblies of a given assembly.
 		bool cut( const char* assemblyPath, const char* outputPath, const WindowParameters& windowParameters, const CutParameters& cutParameters, const uint32_t threads ) const;
 
+		// Stores a Stash in the given path.
 		bool save( const char* outputPath );
 
 	private:
@@ -49,6 +56,7 @@ namespace Stash
 		std::vector<std::string> m_rawSeeds;
 	};
 
+	// StashCut Parameters
 	struct WindowParameters
 	{
 		uint32_t numberOfFrames;
@@ -58,6 +66,7 @@ namespace Stash
 		uint32_t GetWindowSize( uint32_t spacedSeedLength ) const { return ( numberOfFrames - 1 ) * stride + spacedSeedLength; }
 	};
 
+	// StashCut Parameters
 	struct CutParameters
 	{
 		uint32_t cutThreshold;
