@@ -6,7 +6,6 @@
 
 ## Overview
 
-**Stash** is an innovative data structure based on stochastic tile hashing designed for _de novo_ long read genome misassembly detection and correction. This repository provides a complete implementation of the Stash algorithm, enabling researchers and bioinformaticians to improve genome assembly quality through automated misassembly identification and correction.
 
 ### Key Features
 
